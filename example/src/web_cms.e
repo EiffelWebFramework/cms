@@ -8,6 +8,11 @@ class
 	WEB_CMS
 
 inherit
+--	CMS_SERVICE
+--		redefine
+--			modules
+--		end
+
 	WSF_DEFAULT_SERVICE
 		redefine
 			initialize

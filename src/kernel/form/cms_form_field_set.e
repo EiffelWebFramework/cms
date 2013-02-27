@@ -51,11 +51,6 @@ feature -- Change
 			items.force (i)
 		end
 
-	prepend (i: CMS_FORM_ITEM)
-		do
-			items.put_front (i)
-		end
-
 	extend_text (t: READABLE_STRING_8)
 		do
 			items.force (create {CMS_FORM_RAW_TEXT}.make (t))
@@ -82,23 +77,23 @@ feature -- Change
 
 feature -- Conversion
 
-	append_to_html (a_theme: CMS_THEME; a_html: STRING_8)
+	to_html (a_theme: CMS_THEME): STRING_8
 		do
-			a_html.append ("<fieldset")
-			append_css_class_to (a_html, Void)
-			append_css_id_to (a_html)
-			append_css_style_to (a_html)
+			Result := "<fieldset"
+			append_css_class_to (Result, Void)
+			append_css_id_to (Result)
+			append_css_style_to (Result)
 
-			a_html.append (">%N")
+			Result.append (">%N")
 			if attached legend as leg then
-				a_html.append ("<legend>" + leg + "</legend>%N")
+				Result.append ("<legend>" + leg + "</legend>%N")
 			end
 			across
 				items as c
 			loop
-				c.item.append_to_html (a_theme, a_html)
+				Result.append (c.item.to_html (a_theme))
 			end
-			a_html.append ("%N</fieldset>%N")
+			Result.append ("%N</fieldset>%N")
 		end
 
 feature {NONE} -- Implementation

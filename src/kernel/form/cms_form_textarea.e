@@ -61,29 +61,30 @@ feature -- Element change
 
 feature -- Conversion
 
-	append_item_to_html (a_theme: CMS_THEME; a_html: STRING_8)
+	item_to_html (a_theme: CMS_THEME): STRING_8
 		do
-			a_html.append ("<textarea name=%""+ name +"%"")
+			Result := "<textarea name=%""+ name +"%""
 			if rows > 0 then
-				a_html.append (" rows=%"" + rows.out + "%"")
+				Result.append (" rows=%"" + rows.out + "%"")
 			end
 			if cols > 0 then
-				a_html.append (" cols=%"" + cols.out + "%"")
+				Result.append (" cols=%"" + cols.out + "%"")
 			end
 
-			append_css_class_to (a_html, Void)
-			append_css_id_to (a_html)
-			append_css_style_to (a_html)
+			append_css_class_to (Result, Void)
+			append_css_id_to (Result)
+			append_css_style_to (Result)
+
 
 			if is_readonly then
-				a_html.append (" readonly=%"readonly%">")
+				Result.append (" readonly=%"readonly%">")
 			else
-				a_html.append (">")
+				Result.append (">")
 			end
 			if attached default_value as dft then
-				a_html.append (a_theme.html_encoded (dft))
+				Result.append (a_theme.html_encoded (dft))
 			end
-			a_html.append ("</textarea>")
+			Result.append ("</textarea>")
 		end
 
 end

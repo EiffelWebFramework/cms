@@ -78,50 +78,45 @@ feature -- Element change
 
 feature -- Conversion
 
-	append_item_to_html (a_theme: CMS_THEME; a_html: STRING_8)
-		local
-			old_count: INTEGER
+	item_to_html (a_theme: CMS_THEME): STRING_8
 		do
-			a_html.append ("<input type=%""+ input_type +"%" name=%""+ name +"%"")
-			append_css_class_to (a_html, Void)
-			append_css_id_to (a_html)
-			append_css_style_to (a_html)
+			Result := "<input type=%""+ input_type +"%" name=%""+ name +"%""
+			append_css_class_to (Result, Void)
+			append_css_id_to (Result)
+			append_css_style_to (Result)
 
 			if is_readonly then
-				a_html.append (" readonly=%"readonly%"")
+				Result.append (" readonly=%"readonly%"")
 			end
 			if attached default_value as dft then
-				a_html.append (" value=%"" + a_theme.html_encoded (dft) + "%"")
+				Result.append (" value=%"" + a_theme.html_encoded (dft) + "%"")
 			end
 			if disabled then
-				a_html.append (" disabled=%"disabled%"")
+				Result.append (" disabled=%"disabled%"")
 			end
 			if size > 0 then
-				a_html.append (" size=%"" + size.out + "%"")
+				Result.append (" size=%"" + size.out + "%"")
 			end
 			if maxlength > 0 then
-				a_html.append (" maxlength=%"" + maxlength.out + "%"")
+				Result.append (" maxlength=%"" + maxlength.out + "%"")
 			end
 
 			if attached specific_input_attributes_string as s then
-				a_html.append_character (' ')
-				a_html.append (s)
+				Result.append_character (' ')
+				Result.append (s)
 			end
-			a_html.append (">")
-			old_count := a_html.count
-			append_child_to_html (a_theme, a_html)
-			if a_html.count > old_count then
-				a_html.append ("</input>")
+			if attached child_to_html (a_theme) as s then
+				Result.append (">")
+				Result.append (s)
+				Result.append ("</input>")
 			else
-				check a_html.item (a_html.count) = '>' end
-				a_html.put ('/', a_html.count) -- replace previous '>'
-				a_html.append (">")
+				Result.append ("/>")
 			end
 		end
 
 feature {NONE} -- Implementation
 
-	append_child_to_html (a_theme: CMS_THEME; a_html: STRING_8)
+	child_to_html (a_theme: CMS_THEME): detachable READABLE_STRING_8
 			-- Specific child element if any.	
 			--| To redefine if needed
 		do

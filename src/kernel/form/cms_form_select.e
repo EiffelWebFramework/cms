@@ -63,6 +63,7 @@ feature -- Element change
 
 	select_value_by_text (a_text: detachable READABLE_STRING_GENERAL)
 		local
+			opt: CMS_FORM_SELECT_OPTION
 			l_found: BOOLEAN
 			v: READABLE_STRING_8
 		do
@@ -103,38 +104,38 @@ feature -- Element change
 
 feature -- Conversion
 
-	append_item_to_html (a_theme: CMS_THEME; a_html: STRING_8)
+	item_to_html (a_theme: CMS_THEME): STRING_8
 		local
 			l_is_already_selected: BOOLEAN
 			h: detachable STRING_8
 		do
-			a_html.append ("<select name=%""+ name +"%" ")
+			Result := "<select name=%""+ name +"%" "
 			if css_id = Void then
-				set_css_id (name + "-select")
+				set_css_id (name +"-select")
 			end
-			append_css_class_to (a_html, Void)
-			append_css_id_to (a_html)
-			append_css_style_to (a_html)
+			append_css_class_to (Result, Void)
+			append_css_id_to (Result)
+			append_css_style_to (Result)
 
 			if is_readonly then
-				a_html.append (" readonly=%"readonly%" />")
+				Result.append (" readonly=%"readonly%" />")
 			else
-				a_html.append ("/>")
+				Result.append ("/>")
 			end
 
 			across
 				options as o
 			loop
-				a_html.append ("<option value=%"" + o.item.value + "%" ")
+				Result.append ("<option value=%"" + o.item.value + "%" ")
 --				if not l_is_already_selected then
 					if
 						o.item.is_selected
 					then
 						l_is_already_selected := True
-						a_html.append (" selected=%"selected%"")
+						Result.append (" selected=%"selected%"")
 					end
 --				end
-				a_html.append (">" + o.item.text + "</option>%N")
+				Result.append (">" + o.item.text + "</option>%N")
 				if attached o.item.description as d then
 					if h = Void then
 						create h.make_empty
@@ -142,9 +143,9 @@ feature -- Conversion
 					h.append ("<div id=%"" + name + "-" + o.item.value + "%" class=%"option%"><strong>"+ o.item.text +"</strong>:"+ d + "</div>")
 				end
 			end
-			a_html.append ("</select>%N")
+			Result.append ("</select>%N")
 			if h /= Void then
-				a_html.append ("<div class=%"select help collapsible%" id=%"" + name + "-help%">" + h + "</div>%N")
+				Result.append ("<div class=%"select help collapsible%" id=%"" + name + "-help%">" + h + "</div>%N")
 			end
 		end
 

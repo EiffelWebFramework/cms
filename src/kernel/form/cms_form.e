@@ -102,20 +102,6 @@ feature -- Items
 			Result := fields_by_name_from (Current, a_name)
 		end
 
-	items_by_css_id (a_id: READABLE_STRING_GENERAL): detachable LIST [CMS_FORM_ITEM]
-		do
-			Result := items_by_css_id_from (Current, a_id)
-		end
-
-	first_item_by_css_id (a_id: READABLE_STRING_GENERAL): detachable CMS_FORM_ITEM
-		do
-			if attached items_by_css_id_from (Current, a_id) as lst then
-				if not lst.is_empty then
-					Result := lst.first
-				end
-			end
-		end
-
 feature {NONE} -- Implementation: Items			
 
 	container_has_field (a_container: ITERABLE [CMS_FORM_ITEM]; a_name: READABLE_STRING_GENERAL): BOOLEAN
@@ -158,35 +144,6 @@ feature {NONE} -- Implementation: Items
 			Result := res
 		end
 
-	items_by_css_id_from (a_container: ITERABLE [CMS_FORM_ITEM]; a_id: READABLE_STRING_GENERAL): detachable ARRAYED_LIST [CMS_FORM_ITEM]
-		local
-			res: detachable ARRAYED_LIST [CMS_FORM_ITEM]
-		do
-			across
-				a_container as i
-			loop
-				if
-					attached {WITH_CSS_ID} i.item as l_with_css_id and then
-					attached l_with_css_id.css_id as l_css_id and then
-					l_css_id.same_string_general (a_id)
-				then
-					if res = Void then
-						create res.make (1)
-					end
-					res.force (i.item)
-				elseif attached {ITERABLE [CMS_FORM_ITEM]} i.item as l_cont then
-					if attached items_by_css_id_from (l_cont, a_id) as lst then
-						if res = Void then
-							res := lst
-						else
-							res.append (lst)
-						end
-					end
-				end
-			end
-			Result := res
-		end
-
 feature -- Change		
 
 	extend (i: CMS_FORM_ITEM)
@@ -210,11 +167,11 @@ feature -- Change
 
 feature -- Conversion
 
-	append_to_html (a_theme: CMS_THEME; a_html: STRING_8)
+	to_html (a_theme: CMS_THEME): STRING_8
 		local
-			s: STRING_8
+			s: STRING
 		do
-			a_html.append ("<form action=%""+ action +"%" id=%""+ id +"%" method=%""+ method +"%" ")
+			Result := "<form action=%""+ action +"%" id=%""+ id +"%" method=%""+ method +"%" "
 			if not html_classes.is_empty then
 				create s.make_empty
 				across
@@ -225,21 +182,15 @@ feature -- Conversion
 					end
 					s.append (cl.item)
 				end
-				a_html.append (" class=%"" + s + "%" ")
+				Result.append (" class=%"" + s + "%" ")
 			end
-			a_html.append (">%N")
+			Result.append (">%N")
 			across
 				items as c
 			loop
-				c.item.append_to_html (a_theme, a_html)
+				Result.append (c.item.to_html (a_theme))
 			end
-			a_html.append ("</form>%N")
-		end
-
-	to_html (a_theme: CMS_THEME): STRING_8
-		do
-			create Result.make_empty
-			append_to_html (a_theme, Result)
+			Result.append ("</form>%N")
 		end
 
 feature {NONE} -- Implementation

@@ -10,7 +10,7 @@ class
 inherit
 	CMS_FORM_ITEM
 		redefine
-			append_to_html
+			to_html
 		end
 
 create
@@ -36,14 +36,14 @@ feature -- Element change
 
 feature -- Conversion
 
-	append_to_html (a_theme: CMS_THEME; a_html: STRING_8)
+	to_html (a_theme: CMS_THEME): STRING_8
 		do
-			append_item_html_to (a_theme, a_html)
+			Result := item_to_html (a_theme)
 		end
 
-	append_item_html_to (a_theme: CMS_THEME; a_html: STRING_8)
+	item_to_html (a_theme: CMS_THEME): STRING_8
 		do
-			a_html.append (text)
+			Result := text
 		end
 
 end

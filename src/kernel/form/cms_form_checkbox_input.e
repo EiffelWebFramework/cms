@@ -14,7 +14,7 @@ inherit
 		redefine
 			set_value,
 			specific_input_attributes_string,
-			append_child_to_html
+			child_to_html
 		end
 
 	CMS_FORM_SELECTABLE_ITEM
@@ -83,16 +83,16 @@ feature -- Change
 
 feature {NONE} -- Implementation
 
-	append_child_to_html (a_theme: CMS_THEME; a_html: STRING_8)
+	child_to_html (a_theme: CMS_THEME): detachable READABLE_STRING_8
 			-- Specific child element if any.	
 			--| To redefine if needed
 		do
 			if attached raw_text as t then
-				a_html.append (t)
+				Result := t
 			elseif attached text as t then
-				a_html.append (a_theme.html_encoded (t))
+				Result := a_theme.html_encoded (t)
 			elseif attached value as v then
-				a_html.append (a_theme.html_encoded (v))
+				Result := a_theme.html_encoded (v)
 			end
 		end
 

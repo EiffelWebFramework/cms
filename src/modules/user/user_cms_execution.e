@@ -112,7 +112,7 @@ feature -- Execution
 					end
 					fd.apply_to_associated_form
 				end
-				f.append_to_html (theme, b)
+				b.append (f.to_html (theme))
 				set_main_content (b)
 			end
 		end
