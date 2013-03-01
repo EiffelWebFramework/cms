@@ -12,21 +12,9 @@ feature -- Status report
 
 feature -- Change
 
-	reset_css_style
+	set_css_style (a_style: like css_style)
 		do
-			css_style := Void
-		end
-
-	add_css_style (a_style: like css_style)
-		local
-			s: like css_style
-		do
-			s := css_style
-			if s = Void then
-				css_style := a_style
-			elseif a_style /= Void then
-				css_style := s + a_style
-			end
+			css_style := a_style
 		end
 
 feature -- Conversion
