@@ -51,7 +51,7 @@ feature -- Status report
 			Result := attached children as l_children and then not l_children.is_empty
 		end
 
-	permission_arguments: detachable ITERABLE [READABLE_STRING_8]
+	permission_arguments: detachable ITERABLE [STRING]
 
 	children: detachable LIST [CMS_LINK]
 
@@ -106,17 +106,14 @@ feature -- Element change
 			qs: STRING
 		do
 			create qs.make_from_string (req.path_info)
-			is_active := qs.same_string (location)
-			if not is_active then
-				if attached req.query_string as l_query_string and then not l_query_string.is_empty then
-					qs.append_character ('?')
-					qs.append (l_query_string)
-				end
-				is_active := qs.same_string (location)
+			if attached req.query_string as l_query_string and then not l_query_string.is_empty then
+				qs.append_character ('?')
+				qs.append (l_query_string)
 			end
+			is_active := qs.same_string (location)
 		end
 
-	set_permission_arguments (args: like permission_arguments)
+	set_permission_arguments (args: ITERABLE [STRING])
 		do
 			permission_arguments := args
 		end

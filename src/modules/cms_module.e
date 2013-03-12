@@ -41,18 +41,17 @@ feature -- Hooks
 
 	help_text (a_path: STRING): STRING
 		do
-			create Result.make_empty
+			Result := ""
 		end
 
-	permissions (a_service: CMS_SERVICE): LIST [CMS_PERMISSION]
+	permissions: LIST [TUPLE [title: detachable STRING; description: detachable STRING]]
 		do
-			create {ARRAYED_SET [CMS_PERMISSION]} Result.make (0)
+			create {ARRAYED_LIST [like permissions.item]} Result.make (0)
 		end
 
 	links: HASH_TABLE [CMS_MODULE_LINK, STRING]
 			-- Link indexed by path
-		do
-			create Result.make (0)
+		deferred
 		end
 
 end

@@ -45,7 +45,6 @@ feature -- Conversion
 			i: INTEGER
 			n: INTEGER
 			in_tag: BOOLEAN
-			t: READABLE_STRING_8
 			p1, p2: INTEGER
 		do
 			create l_new.make (a_text.count)
@@ -76,9 +75,7 @@ feature -- Conversion
 						else
 							i := a_text.index_of ('<', p2 + 1)
 						end
-						if i = 0 then
-							p1 := p2 + 1
-						else
+						if i > 0 then
 							l_new.append (a_text.substring (p2 + 1, i - 1))
 						end
 					end

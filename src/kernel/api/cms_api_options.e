@@ -16,8 +16,7 @@ create
 
 convert
 	make_from_manifest ({ ARRAY [TUPLE [key: STRING; value: detachable ANY]],
-						  ARRAY [TUPLE [STRING_8, ARRAY [TUPLE [STRING_8, STRING_32]]]],
-						  ARRAY [TUPLE [STRING_8, ARRAY [TUPLE [STRING_8, STRING_8]]]]
+						  ARRAY [TUPLE [STRING_8, ARRAY [TUPLE [STRING_8, READABLE_STRING_32]]]]
 						})
 
 feature {NONE} -- Initialization

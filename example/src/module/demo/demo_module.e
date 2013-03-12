@@ -9,9 +9,6 @@ class
 
 inherit
 	CMS_MODULE
-		redefine
-			links
-		end
 
 	CMS_HOOK_MENU_ALTER
 
@@ -58,7 +55,7 @@ feature -- Hooks
 		local
 			lnk: CMS_MODULE_LINK
 		do
-			Result := Precursor
+			create Result.make (0)
 			create lnk.make ("Date/time demo")
 --			lnk.set_callback (agent process_date_time_demo, <<"arg">>)
 --			Result["/demo/date/{arg}"] := lnk
