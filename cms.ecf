@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-10-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-10-0 http://www.eiffel.com/developers/xml/configuration-1-10-0.xsd" name="cms" library_target="cms" uuid="0D24AE3C-61DA-4E81-8DCF-90C2E65FB669">
+<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-10-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-10-0 http://www.eiffel.com/developers/xml/configuration-1-10-0.xsd" name="cms" library_target="cms" uuid="9B6AF315-AFAB-4124-9260-BBB5FFDF4790">
 	<target name="cms">
 		<root all_classes="true"/>
 		<file_rule>
@@ -14,17 +14,17 @@
 		<setting name="exception_trace" value="true"/>
 
 		<library name="base" location="$ISE_LIBRARY\library\base\base.ecf"/>
-		<library name="encoder" location="..\..\..\library\text\encoder\encoder.ecf" readonly="false"/>
-		<library name="wsf_html" location="..\..\..\library\server\wsf_html\wsf_html.ecf" readonly="false"/>
-		<library name="http" location="..\..\..\library\network\protocol\http\http.ecf" readonly="false"/>
-		<library name="openid" location="..\..\..\library\security\openid\consumer\openid.ecf" />
+		<library name="encoder" location="$ISE_LIBRARY\contrib\library\web\framework\ewf\text\encoder\encoder.ecf" readonly="false"/>
+		<library name="http" location="$ISE_LIBRARY\contrib\library\network\protocol\http\http.ecf" readonly="false"/>
+		<library name="notification_email" location="$ISE_LIBRARY\contrib\library\runtime\process\notification_email\notification_email.ecf"/>
+		<library name="openid" location="$ISE_LIBRARY\contrib\library\security\openid\consumer\openid.ecf" readonly="false"/>
 		<library name="process" location="$ISE_LIBRARY\library\process\process.ecf"/>
 		<library name="time" location="$ISE_LIBRARY\library\time\time.ecf"/>
+		<library name="uri_template" location="$ISE_LIBRARY\contrib\library\text\parser\uri_template\uri_template.ecf"/>
 		<library name="uuid" location="$ISE_LIBRARY\library\uuid\uuid.ecf"/>
-		<library name="uri_template" location="..\..\..\library\text\parser\uri_template\uri_template.ecf"/>
-		<library name="wsf" location="..\..\..\library\server\wsf\wsf.ecf" readonly="false"/>
-		<library name="wsf_session" location="..\..\..\library\server\wsf\wsf_session.ecf" readonly="false"/>
-		<library name="notification_email" location="..\..\..\library\runtime\process\notification_email\notification_email.ecf"/>
+		<library name="wsf" location="$ISE_LIBRARY\contrib\library\web\framework\ewf\wsf\wsf.ecf" readonly="false"/>
+		<library name="wsf_html" location="$ISE_LIBRARY\contrib\library\web\framework\ewf\wsf_html\wsf_html.ecf" readonly="false"/>
+		<library name="wsf_session" location="$ISE_LIBRARY\contrib\library\web\framework\ewf\wsf\wsf_session.ecf" readonly="false"/>
 		<cluster name="src" location=".\src\" recursive="true">
 		</cluster>
 	</target>
