@@ -54,9 +54,9 @@ feature -- Access
 
 	last_login_date: detachable DATE_TIME
 
-	data: detachable HASH_TABLE [detachable ANY, STRING]
+	data: detachable STRING_TABLE [detachable ANY]
 
-	data_item (k: STRING): detachable ANY
+	data_item (k: READABLE_STRING_GENERAL): detachable ANY
 		do
 			if attached data as l_data then
 				Result := l_data.item (k)
@@ -142,7 +142,7 @@ feature -- Element change
 			profile := prof
 		end
 
-	set_data_item (k: READABLE_STRING_8; d: like data_item)
+	set_data_item (k: READABLE_STRING_GENERAL; d: like data_item)
 		local
 			l_data: like data
 		do
@@ -154,7 +154,7 @@ feature -- Element change
 			l_data.force (d, k)
 		end
 
-	remove_data_item (k: READABLE_STRING_8)
+	remove_data_item (k: READABLE_STRING_GENERAL)
 		do
 			if attached data as l_data then
 				l_data.remove (k)
@@ -192,4 +192,14 @@ feature {CMS_STORAGE} -- Security
 			encoded_password := p
 		end
 
+note
+	copyright: "2011-2013, Jocelyn Fiat, Eiffel Software and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
+	source: "[
+			Eiffel Software
+			5949 Hollister Ave., Goleta, CA 93117 USA
+			Telephone 805-685-1006, Fax 805-685-6869
+			Website http://www.eiffel.com
+			Customer support http://support.eiffel.com
+		]"
 end

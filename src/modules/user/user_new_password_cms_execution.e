@@ -131,7 +131,7 @@ feature -- Execution
 				th.set_is_required (True)
 				f.extend (th)
 			else
-				f.extend_text ("The associated account has no e-mail address.")
+				f.extend_html_text ("The associated account has no e-mail address.")
 				err := True
 			end
 
@@ -168,4 +168,14 @@ feature -- Execution
 			create Result.make (service.site_email, a_mail_address, "Account details for " + u.name + " at " + service.site_name, b)
 		end
 
+note
+	copyright: "2011-2013, Jocelyn Fiat, Eiffel Software and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
+	source: "[
+			Eiffel Software
+			5949 Hollister Ave., Goleta, CA 93117 USA
+			Telephone 805-685-1006, Fax 805-685-6869
+			Website http://www.eiffel.com
+			Customer support http://support.eiffel.com
+		]"
 end

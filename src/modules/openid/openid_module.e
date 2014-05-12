@@ -92,7 +92,7 @@ feature -- Hooks
 					create fh.make_with_text ("openid-identity", l_openid_identity.to_string_32)
 					a_execution.remove_session_item ("openid.identity")
 					a_form.extend (fh)
-					a_form.extend_text ("The new account will be associated with OpenID %""+ a_execution.html_encoded (l_openid_identity) +"%"")
+					a_form.extend_html_text ("The new account will be associated with OpenID %""+ a_execution.html_encoded (l_openid_identity) +"%"")
 					if attached {READABLE_STRING_GENERAL} a_execution.session_item ("openid.nickname") as l_openid_nickname then
 						if attached a_form.fields_by_name ("username") as f_lst then
 							across
@@ -138,4 +138,14 @@ feature -- Access
 			end
 		end
 
+note
+	copyright: "2011-2013, Jocelyn Fiat, Eiffel Software and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
+	source: "[
+			Eiffel Software
+			5949 Hollister Ave., Goleta, CA 93117 USA
+			Telephone 805-685-1006, Fax 805-685-6869
+			Website http://www.eiffel.com
+			Customer support http://support.eiffel.com
+		]"
 end

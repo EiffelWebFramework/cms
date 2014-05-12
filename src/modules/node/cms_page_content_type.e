@@ -56,7 +56,7 @@ feature -- Factory
 			ti.set_is_required (True)
 			f.extend (ti)
 
-			f.extend_text ("<br/>")
+			f.extend_html_text ("<br/>")
 
 			create ta.make ("body")
 			ta.set_rows (10)
@@ -72,7 +72,7 @@ feature -- Factory
 			fset.set_legend ("Body")
 			fset.extend (ta)
 
-			fset.extend_text ("<br/>")
+			fset.extend_html_text ("<br/>")
 
 			create tselect.make ("format")
 			tselect.set_label ("Body's format")
@@ -173,4 +173,14 @@ feature -- Factory
 
 invariant
 
+note
+	copyright: "2011-2013, Jocelyn Fiat, Eiffel Software and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
+	source: "[
+			Eiffel Software
+			5949 Hollister Ave., Goleta, CA 93117 USA
+			Telephone 805-685-1006, Fax 805-685-6869
+			Website http://www.eiffel.com
+			Customer support http://support.eiffel.com
+		]"
 end

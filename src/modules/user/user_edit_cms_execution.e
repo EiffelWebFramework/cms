@@ -154,14 +154,14 @@ feature -- Execution
 			ti.set_is_readonly (True)
 			f.extend (ti)
 
-			f.extend_text ("<br/>")
+			f.extend_html_text ("<br/>")
 
 			create tp.make ("password")
 			tp.set_label ("Password")
 			tp.set_is_required (False)
 			f.extend (tp)
 
-			f.extend_text ("<br/>")
+			f.extend_html_text ("<br/>")
 
 			create ti.make ("email")
 			ti.set_label ("Valid email address")
@@ -171,7 +171,7 @@ feature -- Execution
 			ti.set_is_required (True)
 			f.extend (ti)
 
-			f.extend_text ("<br/>")
+			f.extend_html_text ("<br/>")
 
 			create ta.make ("note")
 			ta.set_label ("Additional note about you")
@@ -203,7 +203,7 @@ feature -- Execution
 					end
 				end
 			end
-			f.extend_text ("<br/>")
+			f.extend_html_text ("<br/>")
 
 			create ts.make ("op")
 			ts.set_default_value ("Save")
@@ -212,4 +212,14 @@ feature -- Execution
 			Result := f
 		end
 
+note
+	copyright: "2011-2013, Jocelyn Fiat, Eiffel Software and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
+	source: "[
+			Eiffel Software
+			5949 Hollister Ave., Goleta, CA 93117 USA
+			Telephone 805-685-1006, Fax 805-685-6869
+			Website http://www.eiffel.com
+			Customer support http://support.eiffel.com
+		]"
 end
