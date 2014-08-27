@@ -116,8 +116,19 @@ feature -- Theme
 	theme: CMS_THEME
 
 	get_theme
+		local
+			l_info: CMS_THEME_INFORMATION
 		do
-			create {DEFAULT_CMS_THEME} theme.make (service)
+			if attached service.theme_information_location as fn then
+				create l_info.make (fn)
+			else
+				create l_info.make_default
+			end
+			if l_info.engine.is_case_insensitive_equal_general ("smarty") then
+				create {SMARTY_CMS_THEME} theme.make (service, l_info)
+			else
+				create {DEFAULT_CMS_THEME} theme.make (service, l_info)
+			end
 		end
 
 feature -- Access: User
@@ -423,6 +434,9 @@ feature -- Generation
 		local
 			s: STRING_8
 		do
+			page.register_variable (is_front, "is_front")
+			page.register_variable (request.absolute_script_url (""), "site_url")
+
 			if attached additional_page_head_lines as l_head_lines then
 				across
 					l_head_lines as hl
@@ -601,7 +615,11 @@ feature {NONE} -- Execution
 			cms_page: CMS_HTML_PAGE
 			page: CMS_HTML_PAGE_RESPONSE
 		do
-			create cms_page.make
+			if is_front then
+				create cms_page.make_typed ("front")
+			else
+				create cms_page.make
+			end
 			prepare (cms_page)
 
 			create page.make (theme.page_html (cms_page))
@@ -712,4 +730,14 @@ feature -- Helper: request
 
 invariant
 
+note
+	copyright: "2011-2014, Jocelyn Fiat, Eiffel Software and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
+	source: "[
+			Eiffel Software
+			5949 Hollister Ave., Goleta, CA 93117 USA
+			Telephone 805-685-1006, Fax 805-685-6869
+			Website http://www.eiffel.com
+			Customer support http://support.eiffel.com
+		]"
 end

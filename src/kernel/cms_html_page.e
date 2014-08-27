@@ -8,9 +8,17 @@ class
 	CMS_HTML_PAGE
 
 create
-	make
+	make,
+	make_typed
 
 feature {NONE} -- Initialization
+
+	make_typed (a_type: like type)
+			-- Make current page with optional page type `a_type'.
+		do
+			make
+			type := a_type
+		end
 
 	make
 		do
@@ -21,7 +29,33 @@ feature {NONE} -- Initialization
 			create header.make
 			create {ARRAYED_LIST [STRING]} head_lines.make (5)
 			header.put_content_type_text_html
+			create variables.make (0)
 		end
+
+feature -- Access
+
+	type: detachable READABLE_STRING_8
+			-- Optional page type.
+			-- such as "front", "about", ... that could be customized by themes.
+
+	title: detachable STRING
+
+	language: STRING
+
+	head_lines: LIST [STRING]
+
+	head_lines_to_string: STRING
+		do
+			create Result.make_empty
+			across
+				head_lines as h
+			loop
+				Result.append (h.item)
+				Result.append_character ('%N')
+			end
+		end
+
+	variables: STRING_TABLE [detachable ANY]
 
 feature -- Status
 
@@ -92,6 +126,11 @@ feature -- Region
 
 feature -- Element change
 
+	register_variable (a_value: detachable ANY; k: READABLE_STRING_GENERAL)
+		do
+			variables.force (a_value, k)
+		end
+
 	add_to_region (s: STRING; k: STRING)
 		local
 			r: detachable STRING
@@ -139,27 +178,6 @@ feature -- Element change
 --		do
 --			set_region (s, "footer")
 --		end
-
-feature -- Access		
-
-	title: detachable STRING
-
-	language: STRING
-
-	head_lines: LIST [STRING]
-
-	head_lines_to_string: STRING
-		do
-			create Result.make_empty
-			across
-				head_lines as h
-			loop
-				Result.append (h.item)
-				Result.append_character ('%N')
-			end
-		end
-
---	variables: HASH_TABLE [detachable ANY, STRING_8]
 
 feature -- Element change
 
@@ -222,4 +240,14 @@ feature -- Element change
 			head_lines.extend (s)
 		end
 
+note
+	copyright: "2011-2014, Jocelyn Fiat, Eiffel Software and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
+	source: "[
+			Eiffel Software
+			5949 Hollister Ave., Goleta, CA 93117 USA
+			Telephone 805-685-1006, Fax 805-685-6869
+			Website http://www.eiffel.com
+			Customer support http://support.eiffel.com
+		]"
 end

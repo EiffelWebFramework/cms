@@ -10,6 +10,8 @@ class
 inherit
 	CMS_HTML_TEMPLATE
 
+	DEFAULT_CMS_TEMPLATE
+
 create
 	make
 
@@ -21,7 +23,7 @@ feature {NONE} -- Initialization
 			create variables.make (0)
 		end
 
-	variables: HASH_TABLE [detachable ANY, STRING]
+	variables: STRING_TABLE [detachable ANY]
 
 feature -- Access
 
@@ -35,6 +37,13 @@ feature -- Access
 	prepare (page: CMS_HTML_PAGE)
 		do
 			variables.make (10)
+
+			across
+				page.variables as ic
+			loop
+				variables.force (ic.item, ic.key)
+			end
+
 			if attached page.title as l_title then
 				variables.force (l_title, "title")
 				variables.force (l_title, "head_title")
@@ -78,4 +87,14 @@ feature {NONE} -- Implementation
 		end
 
 
+note
+	copyright: "2011-2014, Jocelyn Fiat, Eiffel Software and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
+	source: "[
+			Eiffel Software
+			5949 Hollister Ave., Goleta, CA 93117 USA
+			Telephone 805-685-1006, Fax 805-685-6869
+			Website http://www.eiffel.com
+			Customer support http://support.eiffel.com
+		]"
 end

@@ -41,6 +41,7 @@ feature {NONE} -- Initialization
 
 			set_script_url (cfg.site_script_url (Void)) -- Temporary value			
 
+			compute_theme_location
 			compute_theme_resource_location
 
 			create content_types.make (3)
@@ -263,12 +264,14 @@ feature -- Router
 
 	themes_location: PATH
 
-	compute_theme_resource_location
-		do
-			theme_resource_location := themes_location.extended (theme_name).extended ("res")
-		end
+	theme_location: PATH
 
 	theme_resource_location: PATH
+
+	theme_information_location: PATH
+		do
+			Result := theme_location.extended ("theme.info")
+		end
 
 	theme_name: READABLE_STRING_32
 
@@ -282,6 +285,18 @@ feature -- Router
 	map_uri (a_uri: STRING; proc: PROCEDURE [ANY, TUPLE [req: WSF_REQUEST; res: WSF_RESPONSE]])
 		do
 			router.map (create {WSF_URI_MAPPING}.make (a_uri, create {CMS_HANDLER}.make (proc)))
+		end
+
+feature -- Compute location
+
+	compute_theme_location
+		do
+			theme_location := themes_location.extended (theme_name)
+		end
+
+	compute_theme_resource_location
+		do
+			theme_resource_location := theme_location.extended ("res")
 		end
 
 feature -- URL related	
@@ -439,4 +454,14 @@ feature -- Core Execution
 			end
 		end
 
+note
+	copyright: "2011-2014, Jocelyn Fiat, Eiffel Software and others"
+	license: "Eiffel Forum License v2 (see http://www.eiffel.com/licensing/forum.txt)"
+	source: "[
+			Eiffel Software
+			5949 Hollister Ave., Goleta, CA 93117 USA
+			Telephone 805-685-1006, Fax 805-685-6869
+			Website http://www.eiffel.com
+			Customer support http://support.eiffel.com
+		]"
 end

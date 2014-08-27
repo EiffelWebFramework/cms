@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-10-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-10-0 http://www.eiffel.com/developers/xml/configuration-1-10-0.xsd" name="cms" uuid="9B6AF315-AFAB-4124-9260-BBB5FFDF4790" library_target="cms">
+<system xmlns="http://www.eiffel.com/developers/xml/configuration-1-13-0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.eiffel.com/developers/xml/configuration-1-13-0 http://www.eiffel.com/developers/xml/configuration-1-13-0.xsd" name="cms" uuid="9B6AF315-AFAB-4124-9260-BBB5FFDF4790" library_target="cms">
 	<target name="cms">
 		<root all_classes="true"/>
 		<file_rule>
@@ -18,6 +18,7 @@
 		<library name="notification_email" location="$ISE_LIBRARY\contrib\library\runtime\process\notification_email\notification_email-safe.ecf"/>
 		<library name="openid" location="$ISE_LIBRARY\contrib\library\security\openid\consumer\openid-safe.ecf" readonly="false"/>
 		<library name="process" location="$ISE_LIBRARY\library\process\process-safe.ecf"/>
+		<library name="template_smarty" location="$ISE_LIBRARY\contrib\library\text\template\smarty\smarty-safe.ecf" readonly="false"/>
 		<library name="time" location="$ISE_LIBRARY\library\time\time-safe.ecf"/>
 		<library name="uri_template" location="$ISE_LIBRARY\contrib\library\text\parser\uri_template\uri_template-safe.ecf"/>
 		<library name="uuid" location="$ISE_LIBRARY\library\uuid\uuid-safe.ecf"/>
