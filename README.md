@@ -1,2 +1,1 @@
-Experimental a simple CMS using EWF.
-Inspired by Drupal
+Please look at https://github.com/EiffelWebFramework/ROC 
